@@ -1,7 +1,7 @@
 function [ offset ] = calculate_offset( im_ref, im_offset, max_offset )
 %CALCULATE_OFFSET Returns the offset of an offset image from a reference
 % `im_ref` is the grayscale reference image
-% `im_offset` is the image that is offset from the refere image
+% `im_offset` is the image that is offset from the reference image
 % `max_offset` is a scalar; maximum that im_offset can be offset from im_ref in any dimension
 % `offset` is a [vert_offset, hori_offset] matrix
 
@@ -41,6 +41,8 @@ for y_offset = (-1 : 1) + coarse_offset(1)
             end - remove_btm - size(crop_offset, 1) + 1 : end - remove_btm, ...
             end - remove_right - size(crop_offset, 2) + 1 : end - remove_right ...
             );
+        
+        % Use XOR to compute how bad this offset is
         cost = sum(xor(crop_ref(:), crop_offset(:)));
         
         if cost < min_cost
