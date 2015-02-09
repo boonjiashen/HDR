@@ -45,7 +45,7 @@ imgHDR = hdrDebevec(images, debevec_g, lnExpTime, w);
 imwrite(imgHDR, 'debevec.png');
 
 disp('Constructing HDR Radiance Map - ReinHard');
-imgTMO = tmoReinhard02(imgHDR, 'global', 0.18, 1e-6, 3);
+imgTMO = Reinhard(imgHDR, 0.18, 1e-6, 3);
 imwrite(imgTMO, 'reinhard.png');
 
 disp('done!');
