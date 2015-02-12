@@ -4,8 +4,12 @@ Requires MATLAB and Image Processing toolbox.
 
 1. Download zip file of test images from [Zhang](http://pages.cs.wisc.edu/~jiaxu/misc/exposures.zip).
 2. Unzip to exposures/ subdirectory.
-2. Run baseline.m on MATLAB
+2. Run `baseline` script on MATLAB
 
-Alternative data source
+Register images in lamp series
 ---
-[Lamp series](https://www.dropbox.com/sh/z3tlqvyl3j3ij15/AADg49yG62HyMWsq8V66mWVUa?dl=0)
+
+Lamp series is a series of images of a lamp, taken by Jia-Shen Boon.
+
+1. Download images from [here](https://www.dropbox.com/sh/z3tlqvyl3j3ij15/AADg49yG62HyMWsq8V66mWVUa?dl=0) into lamp_series/ subdirectory
+2. On MATLAB, run `align_lamp` script from top-level directory.
