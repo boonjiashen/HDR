@@ -1,4 +1,4 @@
-function HDR( folder, extensions )
+% function HDR( folder, extensions )
 %HDR Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -49,5 +49,4 @@ imgTMO = Reinhard(imgHDR, 0.18, 1e-6, 3);
 imwrite(imgTMO, 'reinhard.png');
 
 disp('done!');
-end
 
