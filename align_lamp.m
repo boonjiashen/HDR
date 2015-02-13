@@ -5,33 +5,49 @@
 folder = 'lamp_series';
 extension = 'JPG';
 filenames = get_rel_path_of_images(folder, extension);
+filenames = filenames(end - 7 : end);  % Reduce no. of images to a subset
 
-middle_ind = floor(numel(filenames) / 2);
-filename1 = filenames{middle_ind + 2};
-filename2 = filenames{middle_ind + 3};
+n_images = numel(filenames);
+images = cell(1, n_images);
+for ni = 1 : numel(filenames)
+    images{ni} = rgb2gray(imread(filenames{ni}));
+end
 
 %% Calculate offset
 
-% Load two grayscale images of difference exposures
-im_exp1 = rgb2gray(imread(filename1));
-im_exp2 = rgb2gray(imread(filename2));
+ind_ref = floor(numel(filenames) / 2);  % Index of reference image
 
-im_ref = im_exp1;  % Reference image for alignment (and we shift the other one)
-im_offset = im_exp2;
-
-% Calculate offset
+% Calculate offset of every image to the reference image
 max_offset = 100;  % Some arbitrary value
-calc_offset = calculate_offset(im_ref, im_offset, max_offset);
+calc_offsets = zeros(n_images, 2);
+for ni = 1 : n_images
+    if ni == ind_ref; continue; end;
+    calc_offset = calculate_offset(images{ind_ref}, images{ni}, max_offset);
+    calc_offsets(ni, :) = calc_offset;
+end
 
 %% Display results
 
-figure('name', 'Input images');
-subplot(1, 2, 1); imshow(im_ref); title(sprintf('Reference image, %f s exposure', get_exposure(filename1)));
-title2 = sprintf('Offset image, %f s exposure, calculated offset = %s', ...
-    get_exposure(filename2), ...
-    num2str(calc_offset));
-subplot(1, 2, 2); imshow(im_offset); title(title2);
+% Prevents underscore from acting as subscript in plot title
+set(0, 'defaulttextinterpreter', 'none');  
 
-figure('name', 'Image difference before and after alignment');
-subplot(1, 2, 1); imshow(abs(im_ref - im_offset)); title('Absolute diff w/o alignment');
-subplot(1, 2, 2); imshow(abs(im_ref - circshift(im_offset, -calc_offset))); title('Absolute diff with alignment');
+for ni = 1 : n_images
+    if ni == ind_ref; continue; end;
+
+    fn_ref = filenames{ind_ref};  % filename of reference image
+    im_ref = images{ind_ref};
+    fn_offset = filenames{ni};  % filename of offset image
+    im_offset = images{ni};
+    calc_offset = calc_offsets(ni, :);
+    
+    figure('name', 'Input images');
+    subplot(2, 2, 1); imshow(im_ref); title(sprintf(['Reference ' fn_ref ', %.3f s exposure'], get_exposure(fn_ref)));
+    
+    title2 = sprintf(['Offset ' fn_offset ', %.3f s exposure, calculated offset = %s'], ...
+        get_exposure(fn_offset), ...
+        num2str(calc_offset));
+    subplot(2, 2, 2); imshow(im_offset); title(title2);
+    subplot(2, 2, 3); imshow(abs(im_ref - im_offset)); title('Absolute diff w/o alignment');
+    subplot(2, 2, 4); imshow(abs(im_ref - circshift(im_offset, -calc_offset))); title('Absolute diff with alignment');
+    
+end
