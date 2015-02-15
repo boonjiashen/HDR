@@ -21,5 +21,4 @@ Output(:, :, 1) = R_Output * 255;
 Output(:, :, 2) = G_Output * 255;
 Output(:, :, 3) = B_Output * 255;
 Output8 = uint8(Output);
-imshow(Output8);
 end
