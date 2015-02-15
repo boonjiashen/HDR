@@ -3,8 +3,10 @@ Run baseline algorithm
 Requires MATLAB and Image Processing toolbox.
 
 1. Download zip file of test images from [Zhang](http://pages.cs.wisc.edu/~jiaxu/misc/exposures.zip).
-2. Unzip to exposures/ subdirectory.
-2. Run `baseline` script on MATLAB
+2. Unzip to zhang/ subdirectory.
+2. On MATLAB terminal, run:
+
+>>> clear all; folder = 'zhang'; extension = 'jpg'; baseline;
 
 Register images in lamp series
 ---
