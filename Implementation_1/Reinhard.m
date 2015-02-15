@@ -17,19 +17,29 @@
 %
 %
 
-function imgOut = Reinhard(img, alpha_, delta, white_)
+function imgOut = Reinhard(img, alpha, delta, white)
 
 imgOut = zeros(size(img));
 
-Lw = 0.2126 * img(:,:,1) + 0.7152 * img(:,:,2) + 0.0722 * img(:,:,3);
+Lw = 0.27 * img(:,:,1) + 0.67 * img(:,:,2) + 0.06 * img(:,:,3); %Moving back to paper specified value
+%The previous value was used by someone in his phd thesis
 
 LwMean = exp(mean(mean(log(delta + Lw))));
-Lm = (alpha_ / LwMean) * Lw;
-Ld = (Lm .* (1 + Lm / (white_ * white_))) ./ (1 + Lm);
+Lm = (alpha / LwMean) * Lw;
+
+
+[x,y] = size(Lm);
+Ldo = zeros(x,y);
+for i = 1:x
+    for j = 1:y
+        Ldo(i,j) = (Lm(i,j) * (1 + Lm(i,j) / (white * white))) / (1 + Lm(i,j));
+    end
+end
 
 for channel = 1:3
-	Cw = img(:,:,channel) ./ Lw;
-	imgOut(:,:,channel) = Cw .* Ld;
+	Cw = img(:,:,channel)./ Lw;
+	imgOut(:,:,channel) = Cw .* Ldo;
+
 end
 
 end

@@ -1,5 +1,6 @@
-% function HDR( folder, extensions )
+function HDR( folder, extensions )
 %HDR Summary of this function goes here
+%   Use - HDR('../../../Images/','.jpg')
 %   Detailed explanation goes here
 
 disp('Hi! This is the HDR algorithm implemented as part of the CS766 Project')
@@ -50,6 +51,7 @@ delta = 1e-6;
 white_ = 3;
 imgTMO = Reinhard(imgHDR, alpha_, delta, white_);
 imwrite(imgTMO, 'reinhard.png');
-
+figure, imshow('reinhard.png')
 disp('done!');
+end
 
