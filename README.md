@@ -1,1 +1,1 @@
-See [wiki](wiki) for description, instructions and contact information.
+See [wiki](/wiki) for description, instructions and contact information.
