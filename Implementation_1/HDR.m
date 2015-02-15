@@ -6,17 +6,17 @@
 disp('Hi! This is the HDR algorithm implemented as part of the CS766 Project')
 disp('-Jiashen Boon and Urmish Thakker')
 
-if (~exist('folder'))
+if ~exist('folder', 'var')
     error('!!!!!!!!Image Folder was not specified!!!!!!!!')
 end
 
-if (~exist('extensions'))
-    disp('Since an extension was not specified, assuming jpg')
-    extensions ='.jpg';
+if exist('extensions', 'var')
+    [exposures, images] = ReadImagesFromFolder(folder,extensions);
+else
+    [exposures, images] = ReadImagesFromFolder(folder);
 end
 
 disp('Loading Images from folder')
-[exposures, images] = ReadImagesFromFolder(folder,extensions);
 [row, col, channels, noi] = size(images);
 disp('Shrinking Images - I am not sure how to select the pixels, we can fix this later') %TODO
 shrunk_row = 20;
