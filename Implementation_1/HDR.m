@@ -50,12 +50,11 @@ alpha_ = 0.18;
 delta = 1e-6;
 white_ = 3;
 imgTMO = Reinhard(imgHDR, alpha_, delta, white_);
-figures, imshow(imgTMO);
 imwrite(imgTMO, 'reinhard.png');
 disp('Tone Mapping - Bilateral Filter');
 imgBFO = BFMapper(imgHDR);
-figures, imshow(imgBFO);
+
+figure('name', 'Reinhard tone map'); imshow(imgTMO);
+figure('name', 'Bilateral filter tone map'); imshow(imgBFO);
 
 disp('done!');
-%end
-
