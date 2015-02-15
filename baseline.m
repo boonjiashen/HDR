@@ -2,14 +2,7 @@
 
 %% Get relative filepaths of input images to HDR
 
-filenames = dir('exposures/*.jpg');
-for i = 1 : numel(filenames)
-    fullpaths{i} = ['exposures/' filenames(i).name];
-end
-% 
-% for i = 1:numel(filenames)
-%     ims{i} = imread(['exposures/' filenames{i}]);
-% end
+fullpaths = get_rel_path_of_images(folder, extension);
 
 %% Create HDR image
 
