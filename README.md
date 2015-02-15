@@ -6,7 +6,9 @@ Requires MATLAB and Image Processing toolbox.
 2. Unzip to zhang/ subdirectory.
 2. On MATLAB terminal, run:
 
->>> clear all; folder = 'zhang'; extension = 'jpg'; baseline;
+<b></b>
+
+    clear all; folder = 'zhang'; extension = 'jpg'; baseline;
 
 Register images in lamp series
 ---
