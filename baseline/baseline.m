@@ -2,7 +2,11 @@
 
 %% Get relative filepaths of input images to HDR
 
-fullpaths = get_rel_path_of_images(folder, extension);
+if exist('extension', 'var')
+    fullpaths = get_rel_path_of_images(folder, extension);
+else
+    fullpaths = get_rel_path_of_images(folder);
+end
 
 %% Create HDR image
 

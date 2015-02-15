@@ -2,8 +2,12 @@
 
 %% Get filename of two images to be aligned
 
-filenames = get_rel_path_of_images(folder, extension);
-
+if exist('extension', 'var')
+    filenames = get_rel_path_of_images(folder, extension);
+else
+    filenames = get_rel_path_of_images(folder);
+end
+    
 middle_ind = floor(numel(filenames) / 2);
 filename1 = filenames{middle_ind - 1};
 filename2 = filenames{middle_ind};
